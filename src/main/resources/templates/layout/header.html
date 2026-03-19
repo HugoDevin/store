@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" th:fragment="header">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/products}">Ecommerce Demo</a>
+        <div class="collapse navbar-collapse show">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item" th:if="${currentRole == 'GUEST' or currentRole == 'BUYER'}"><a class="nav-link" th:href="@{/products}">商品列表</a></li>
+                <li class="nav-item" th:if="${currentRole == 'GUEST'}"><a class="nav-link" th:href="@{/login}">登入</a></li>
+                <li class="nav-item" th:if="${currentRole == 'GUEST'}"><a class="nav-link" th:href="@{/register}">註冊</a></li>
+                <li class="nav-item" th:if="${currentRole == 'BUYER'}"><a class="nav-link" th:href="@{/buyer/orders}">我的訂單</a></li>
+                <li class="nav-item" th:if="${currentRole == 'SELLER'}"><a class="nav-link" th:href="@{/seller/products}">商品管理</a></li>
+                <li class="nav-item" th:if="${currentRole == 'SELLER'}"><a class="nav-link" th:href="@{/seller/orders}">訂單管理</a></li>
+            </ul>
+            <div class="text-white me-3 small">使用者：<span th:text="${currentUsername}"></span> / 角色：<span th:text="${currentRole}"></span></div>
+            <form th:if="${currentRole != 'GUEST'}" th:action="@{/logout}" method="post"><button class="btn btn-outline-light btn-sm">登出</button></form>
+        </div>
+    </div>
+</nav>
+</body>
+</html>
